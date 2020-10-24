@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Carousel = () => {
+const CarouselComponent = () => {
     return (
         <div>
             <img style={{width: '100vw'}} src={'https://m.media-amazon.com/images/M/MV5BODdjMTEwNjQtOWYzZC00N2M0LWFjYmEtZjZjZDI4ZjU3YWE5XkEyXkFqcGdeQXVyMjAyNTUxMw@@._V1_.jpg'}/>
@@ -8,4 +8,4 @@ const Carousel = () => {
     );
 }
 
-export default Carousel;
+export default CarouselComponent;

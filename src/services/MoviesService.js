@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const getMovies = () => {
-    axios.get('https://api.themoviedb.org/3/discover/movie?api_key=7190666598a5ce271e7b863bb629a95e')
-        .then(res => console.log(res))
+    return axios.get('https://api.themoviedb.org/3/discover/movie?api_key=7190666598a5ce271e7b863bb629a95e')
+        .then(res => res.data.results)
 }
 
 export const getMovie = (movieId) => {

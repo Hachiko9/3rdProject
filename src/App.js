@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
-import Navbar from "./components/Navbar";
-import Carousel from './components/Carousel'
-import NowPlaying from "./components/NowPlaying";
+import NavbarComponent from "./components/NavbarComponent";
+import CarouselComponent from './components/CarouselComponent'
+import NowPlayingComponent from "./components/NowPlayingComponent";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import theme from "./theme";
 import {ThemeProvider} from  '@material-ui/core/styles'
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from "./Pages/Home";
+import NowPlayingPage from "./Pages/NowPlayingPage";
+import AllMoviesPage from "./Pages/AllMoviesPage";
 
 function App() {
 
@@ -15,10 +17,10 @@ function App() {
       <ThemeProvider theme={theme}>
           <CssBaseline />
           <div className="App">
-              <Navbar />
+              <NavbarComponent />
               <BrowserRouter>
                   <Route exact path="/" render={() => < Home/>} />
-                  {/*<Route exact path="/all-movies" render={() => <AllMovies />} />*/}
+                  <Route exact path="/all-movies" render={() => <AllMoviesPage />} />
                   {/*<Route exact path="/reviews" render={() => <Reviews />} />*/}
                   {/*<Route exact path="/reviews/add" render={() => <ReviewAdd />} />*/}
                   {/*<Route exact path="/profile" render={() => <Profile />} />*/}
@@ -29,7 +31,7 @@ function App() {
                   {/*<Route exact path="/random-movie" render={() => <RandomMovie />} />*/}
                   {/*<Route exact path="/must-watch" render={() => <MustWatch />} />*/}
                   {/*<Route exact path="/about" render={() => <About />} />*/}
-                  {/*<Route exact path="/now-playing" render={() => <NowPlaying />} />*/}
+                  <Route exact path="/now-playing" render={() => <NowPlayingPage />} />
               </BrowserRouter>
           </div>
       </ThemeProvider>

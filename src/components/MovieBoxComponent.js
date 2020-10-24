@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MovieBox = ({movie}) => {
+const MovieBoxComponent = ({movie}) => {
     const classes = useStyles();
 
     return (
@@ -28,4 +28,4 @@ const MovieBox = ({movie}) => {
     );
 }
 
-export default MovieBox;
+export default MovieBoxComponent;

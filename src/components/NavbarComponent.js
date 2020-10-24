@@ -36,20 +36,22 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Navbar = () => {
+const NavbarComponent = () => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Typography className={classes.title} variant="h5" >
-                        Material-UI
-                    </Typography>
+                    <Link href={'/'}>
+                        <Typography className={classes.title} variant="h5" >
+                            Material-UI
+                        </Typography>
+                    </Link>
                     <div className={classes.actionsContainer}>
                         <div>
-                            <Link color="secondary" href="#" className={classes.link}>
-                                Test
+                            <Link color="secondary" href="/now-playing" className={classes.link}>
+                                Now Playing
                             </Link>
                             <Link color="secondary" href="#" className={classes.link}>
                                 Test
@@ -76,4 +78,4 @@ const Navbar = () => {
     );
 }
 
-export default Navbar;
+export default NavbarComponent;

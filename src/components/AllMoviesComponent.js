@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import MovieBox from "./MovieBox";
+import MovieBoxComponent from "./MovieBoxComponent";
 import {makeStyles} from "@material-ui/core/styles";
-import {nowPlaying} from "../services/MoviesService";
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,24 +14,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NowPlaying = () => {
+const AllMoviesComponent = ({movies}) => {
     const classes = useStyles();
-    const [ npMovies, setNPMovies ] = useState([]);
-
-    useEffect(() => {
-        nowPlaying().then(movies => setNPMovies(movies.slice(0,12)));
-    }, []);
 
     return (
         <div className={classes.root}>
-            <h2>Now Playing</h2>
+            <h2>All Movies</h2>
             <div className={classes.grid}>
-                {npMovies.map(movie =>
-                <MovieBox {...{movie}} />
+                {movies.map(movie =>
+                    <MovieBoxComponent {...{movie}} />
                 )}
             </div>
         </div>
     );
 }
 
-export default NowPlaying;
+export default AllMoviesComponent;
