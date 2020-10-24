@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import MovieBoxComponent from "./MovieBoxComponent";
 import {makeStyles} from "@material-ui/core/styles";
+import {getGenres} from "../services/MoviesService";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
 
 const AllMoviesComponent = ({movies}) => {
     const classes = useStyles();
+
+    useEffect(() => {
+        console.log(movies);
+    }, [movies]);
 
     return (
         <div className={classes.root}>
