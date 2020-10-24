@@ -10,6 +10,11 @@ export const getMovie = (movieId) => {
         .then(res => console.log(res))
 }
 
+export const searchMovie = (query) => {
+    return axios.get(`https://api.themoviedb.org/3/search/movie?api_key=7190666598a5ce271e7b863bb629a95e&query=${query}`)
+        .then(res => res.data.results)
+}
+
 export const nowPlaying = () => {
     return axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=7190666598a5ce271e7b863bb629a95e&language=en-US&page=1`)
         .then(res => res.data.results)

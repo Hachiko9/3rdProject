@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from "@material-ui/core/Link";
+import SearchComponent from "./SearchComponent";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,7 +45,7 @@ const NavbarComponent = () => {
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
                     <Link href={'/'}>
-                        <Typography className={classes.title} variant="h5" >
+                        <Typography className={classes.title} variant="h5" noWrap>
                             Material-UI
                         </Typography>
                     </Link>
@@ -64,10 +65,11 @@ const NavbarComponent = () => {
                             </Link>
                         </div>
                         <div>
-                            <IconButton aria-label="search" color="inherit" noWrap>
-                                <SearchIcon />
+                            <IconButton aria-label="search" color="inherit">
+                                {/*<SearchIcon />*/}
+                                <SearchComponent />
                             </IconButton>
-                            <IconButton aria-label="display more actions" edge="end" color="inherit" noWrap>
+                            <IconButton aria-label="display more actions" edge="end" color="inherit">
                                 <MoreIcon />
                             </IconButton>
                         </div>
