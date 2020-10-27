@@ -54,14 +54,14 @@ const NavbarComponent = () => {
                             <Link color="secondary" href="/now-playing" className={classes.link}>
                                 Now Playing
                             </Link>
-                            <Link color="secondary" href="#" className={classes.link}>
-                                Test
+                            <Link color="secondary" href="/all-movies" className={classes.link}>
+                                All Movies
+                            </Link>
+                            <Link color="secondary" href="/profile" className={classes.link}>
+                                Profile
                             </Link>
                             <Link color="secondary" href="#" className={classes.link}>
-                                Test
-                            </Link>
-                            <Link color="secondary" href="#" className={classes.link}>
-                                Test
+                                Login
                             </Link>
                         </div>
                         <div>

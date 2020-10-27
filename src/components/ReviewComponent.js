@@ -18,18 +18,18 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MovieBoxComponent = ({movie}) => {
+const ReviewComponent = ({review}) => {
     const classes = useStyles();
 
     return (
-        <Link href={`/movie-details/${movie.id}`}>
-            <div className={classes.root} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}>
-                <span>{movie.title}</span>
-                <span>{movie.vote_average}</span>
+       // <Link href={`/review-edit/${review.id}`}>
+            <div className={classes.root}>
+                <span>{review.author}</span>
+                <span>{review.content}</span>
             </div>
-        </Link>
+        //</Link>
 
     );
 }
 
-export default MovieBoxComponent;
+export default ReviewComponent;

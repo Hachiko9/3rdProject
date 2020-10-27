@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import MovieBoxComponent from "./MovieBoxComponent";
+import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
+import ReviewComponent from "./ReviewComponent";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,19 +14,20 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NowPlayingComponent = ({movies}) => {
+const AllReviewsComponent = ({reviews}) => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <h2>Now Playing</h2>
+            <h2>All reviewes</h2>
             <div className={classes.grid}>
-                {movies.map(movie =>
-                <MovieBoxComponent key={movie.id}  {...{movie}} />
+                {reviews && reviews.map(review =>
+                    <ReviewComponent key={review.id} review={review}/>
                 )}
+
             </div>
         </div>
     );
 }
 
-export default NowPlayingComponent;
+export default AllReviewsComponent;

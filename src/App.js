@@ -10,6 +10,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Home from "./Pages/Home";
 import NowPlayingPage from "./Pages/NowPlayingPage";
 import AllMoviesPage from "./Pages/AllMoviesPage";
+import MovieDetailsPage from "./Pages/MovieDetailsPage";
+import Profile from "./Pages/Profile";
 
 function App() {
 
@@ -21,9 +23,10 @@ function App() {
               <BrowserRouter>
                   <Route exact path="/" render={() => < Home/>} />
                   <Route exact path="/all-movies" render={() => <AllMoviesPage />} />
+                  <Route exact path="/movie-details/:movieId" render={() => <MovieDetailsPage />} />
                   {/*<Route exact path="/reviews" render={() => <Reviews />} />*/}
                   {/*<Route exact path="/reviews/add" render={() => <ReviewAdd />} />*/}
-                  {/*<Route exact path="/profile" render={() => <Profile />} />*/}
+                  <Route exact path="/profile" render={() => <Profile />} />
                   {/*<Route exact path="/profile/reviews" render={() => <PersonalReviews />} />*/}
                   {/*<Route exact path="/auth" render={() => <Auth />} />*/}
                   {/*/!*  Backlog  *!/*/}

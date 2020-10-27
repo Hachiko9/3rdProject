@@ -6,8 +6,8 @@ export const getMovies = () => {
 }
 
 export const getMovie = (movieId) => {
-    axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=7190666598a5ce271e7b863bb629a95e`)
-        .then(res => console.log(res))
+    return axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=7190666598a5ce271e7b863bb629a95e`)
+        .then(res => res.data)
 }
 
 export const searchMovie = (query) => {
@@ -41,23 +41,9 @@ export const getGenres = () => {
 }
 
 export const getMoviesByFilter = (filters) => {
-    /*
-    * base: https://api.themoviedb.org/3/discover/movie?api_key=7190666598a5ce271e7b863bb629a95e
-    * filtri:
-    *   with_genres
-    *   year
-    *   vote_average.gte
-    *
-    * filters = {
-    *   with_genres: ['comedy', 'horror'],
-    *   year: null,
-    *   vote_average.gte: null
-    * }
-    */
     let url = `https://api.themoviedb.org/3/discover/movie?api_key=7190666598a5ce271e7b863bb629a95e`;
 
     for (let key in filters) {
-        console.log(typeof filters[key]);
         if (typeof filters[key] === 'object') {
             url = url.concat(`&${key}=`)
 
@@ -69,7 +55,6 @@ export const getMoviesByFilter = (filters) => {
         }
     }
 
-    console.log(url);
     return axios.get(url).then(res => res.data.results)
 }
 
