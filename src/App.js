@@ -12,6 +12,8 @@ import NowPlayingPage from "./Pages/NowPlayingPage";
 import AllMoviesPage from "./Pages/AllMoviesPage";
 import MovieDetailsPage from "./Pages/MovieDetailsPage";
 import Profile from "./Pages/Profile";
+import LoginPage from "./Pages/LoginPage";
+import SignupPage from "./Pages/SignupPage";
 
 function App() {
 
@@ -28,7 +30,8 @@ function App() {
                   {/*<Route exact path="/reviews/add" render={() => <ReviewAdd />} />*/}
                   <Route exact path="/profile" render={() => <Profile />} />
                   {/*<Route exact path="/profile/reviews" render={() => <PersonalReviews />} />*/}
-                  {/*<Route exact path="/auth" render={() => <Auth />} />*/}
+                  <Route exact path="/login" render={() => <LoginPage />} />
+                  <Route exact path="/signup" render={() => <SignupPage />} />
                   {/*/!*  Backlog  *!/*/}
                   {/*<Route exact path="/fun-facts" render={() => <FunFacts />} />*/}
                   {/*<Route exact path="/random-movie" render={() => <RandomMovie />} />*/}

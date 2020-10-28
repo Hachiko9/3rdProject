@@ -1,28 +1,29 @@
 import axios from 'axios';
 
 export const login = (email, password) => {
-    return axios.post('http://localhost:8000/login', {email, password})
+    return axios.post('http://localhost:8000/user/login', {email, password})
         .then(res => {
-            localStorage.setItem('accessToken', res.accessToken);
-            localStorage.setItem('user', JSON.stringify(res.user));
+            console.log(res);
+            localStorage.setItem('accessToken', res.data.accessToken);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
             return res;
         })
         .catch(err => err);
 }
 
-export const signup = (email, username, password) => {
-    return axios.post('http://localhost:8000/signup', {email, username, password})
+export const signup = (email, password, username) => {
+    return axios.post('http://localhost:8000/user/signup', {email, username, password})
         .then(res => {
-            localStorage.setItem('accessToken', res.accessToken);
-            localStorage.setItem('user', JSON.stringify(res.user));
+            localStorage.setItem('accessToken', res.data.accessToken);
+            localStorage.setItem('user', JSON.stringify(res.data.user));
             return res;
         })
         .catch(err => err);
 }
 
 export const logout = () => {
-    const accessToken = localStorage.getItem('accessToken');
-    return axios.post('http://localhost:8000/logout', {accessToken})
+    const userId = JSON.parse(localStorage.getItem('user'))._id;
+    return axios.post('http://localhost:8000/user/logout', {userId})
         .then(() => {
             localStorage.clear();
         })

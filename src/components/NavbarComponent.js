@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Link from "@material-ui/core/Link";
 import SearchComponent from "./SearchComponent";
+import {logout} from "../services/UserService";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -40,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
 const NavbarComponent = () => {
     const classes = useStyles();
 
+    const handleLogout = () => {
+        logout().then(() => document.location.reload()).catch(err => console.log(err));
+    }
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -60,17 +65,15 @@ const NavbarComponent = () => {
                             <Link color="secondary" href="/profile" className={classes.link}>
                                 Profile
                             </Link>
-                            <Link color="secondary" href="#" className={classes.link}>
-                                Login
-                            </Link>
                         </div>
                         <div>
                             <IconButton aria-label="search" color="inherit">
                                 {/*<SearchIcon />*/}
                                 <SearchComponent />
                             </IconButton>
-                            <IconButton aria-label="display more actions" edge="end" color="inherit">
+                            <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
                                 <MoreIcon />
+                                Logout
                             </IconButton>
                         </div>
                     </div>
