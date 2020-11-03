@@ -13,8 +13,26 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
-        alignItems: 'flex-start'
-
+        alignItems: 'flex-start',
+        borderRadius: 8
+    },
+    detailsContainer: {
+        alignItems: 'flex-start',
+        background: 'linear-gradient(180deg,transparent,#000)',
+        borderRadius: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        fontWeight: 600,
+        height: '30%',
+        paddingLeft: 16,
+        width: '100%'
+    },
+    title: {
+        overflow: 'hidden',
+        textAlign: 'left',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        width: '92%'
     }
 }));
 
@@ -24,8 +42,10 @@ const MovieBoxComponent = ({movie}) => {
     return (
         <Link href={`/movie-details/${movie.id}`}>
             <div className={classes.root} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}>
-                <span>{movie.title}</span>
-                <span>{movie.vote_average}</span>
+                <div className={classes.detailsContainer}>
+                    <span className={classes.title}>{movie.title}</span>
+                    <span>{movie.vote_average}</span>
+                </div>
             </div>
         </Link>
 

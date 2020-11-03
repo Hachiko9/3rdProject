@@ -51,7 +51,7 @@ const NavbarComponent = () => {
                 <Toolbar className={classes.toolbar}>
                     <Link href={'/'}>
                         <Typography className={classes.title} variant="h5" noWrap>
-                            Material-UI
+                            The BBB club
                         </Typography>
                     </Link>
                     <div className={classes.actionsContainer}>
@@ -68,11 +68,9 @@ const NavbarComponent = () => {
                         </div>
                         <div>
                             <IconButton aria-label="search" color="inherit">
-                                {/*<SearchIcon />*/}
                                 <SearchComponent />
                             </IconButton>
                             <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
-                                <MoreIcon />
                                 Logout
                             </IconButton>
                         </div>

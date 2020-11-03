@@ -2,20 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {getMovie} from "../services/MoviesService";
 import {getReviewsByMovie} from "../services/ReviewService";
-import AllReviewsComponent from "../components/AllReviewsComponent";
+import ReviewsComponent from "../components/ReviewsComponent";
 
 
 const MovieDetailsPage = () => {
     const [ movie, setMovie ] = useState({});
-    const [ reviews, setReviews ] = useState([]);
     const {movieId} = useParams();
 
     useEffect(() => {
         getMovie(movieId).then(movie => setMovie(movie));
-        getReviewsByMovie(movieId).then(movie => setReviews(movie));
     }, []);
 
-    console.log(reviews);
 
     return (
         <div>
@@ -26,7 +23,7 @@ const MovieDetailsPage = () => {
                     <span>{movie.primary_release_year}</span>
                     <span>{movie.with_cast}</span>
                     <span>{movie.overview}</span>
-                    <AllReviewsComponent reviews={reviews}/>
+                    <ReviewsComponent/>
                 </div>
             )}
         </div>

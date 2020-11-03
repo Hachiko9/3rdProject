@@ -1,6 +1,8 @@
 import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
+import Button from "@material-ui/core/Button";
+import {deleteReview} from "../services/ReviewService";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ReviewComponent = ({review}) => {
+const ReviewComponent = ({handleDelete, review}) => {
     const classes = useStyles();
 
     return (
@@ -26,6 +28,9 @@ const ReviewComponent = ({review}) => {
             <div className={classes.root}>
                 <span>{review.author}</span>
                 <span>{review.content}</span>
+                <Button variant="outlined" color="primary" onClick={() => handleDelete(review._id)}>
+                    Delete
+                </Button>
             </div>
         //</Link>
 

@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import AllMoviesComponent from "../components/AllMoviesComponent";
-import {getMovies, getMoviesByFilter} from "../services/MoviesService";
-import FilterComponent from "../components/FilterComponent";
-import AllReviewsComponent from "../components/AllReviewsComponent";
+import ReviewsComponent from "../components/ReviewsComponent";
+import {getReviewsByUser} from "../services/ReviewService";
 
 const Profile = () => {
+    const [ reviews, setReviews ] = useState({});
+
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log('user', user)
+
+    useEffect(() => {
+        getReviewsByUser(user._id).then(reviews => setReviews(reviews)).catch(err => console.log(err))
+    }, []);
 
     return (
         <div>
-            hey
-            <AllReviewsComponent />
+            <ReviewsComponent reviews={reviews}/>
         </div>
     );
 }

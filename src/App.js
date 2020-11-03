@@ -14,6 +14,7 @@ import MovieDetailsPage from "./Pages/MovieDetailsPage";
 import Profile from "./Pages/Profile";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
+import ReviewFormPage from "./Pages/ReviewFormPage";
 
 function App() {
 
@@ -26,10 +27,9 @@ function App() {
                   <Route exact path="/" render={() => < Home/>} />
                   <Route exact path="/all-movies" render={() => <AllMoviesPage />} />
                   <Route exact path="/movie-details/:movieId" render={() => <MovieDetailsPage />} />
-                  {/*<Route exact path="/reviews" render={() => <Reviews />} />*/}
-                  {/*<Route exact path="/reviews/add" render={() => <ReviewAdd />} />*/}
+                  <Route exact path="/:movieId/reviews/add" render={() => <ReviewFormPage />} />
+                  <Route exact path="/:movieId/reviews/:reviewId/edit" render={() => <ReviewFormPage />} />
                   <Route exact path="/profile" render={() => <Profile />} />
-                  {/*<Route exact path="/profile/reviews" render={() => <PersonalReviews />} />*/}
                   <Route exact path="/login" render={() => <LoginPage />} />
                   <Route exact path="/signup" render={() => <SignupPage />} />
                   {/*/!*  Backlog  *!/*/}
