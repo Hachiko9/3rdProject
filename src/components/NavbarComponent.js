@@ -56,7 +56,7 @@ const NavbarComponent = () => {
                     </Link>
                     <div className={classes.actionsContainer}>
                         <div>
-                            <Link color="secondary" href="/now-playing" className={classes.link}>
+                            <Link color="secondary" to="/now-playing" className={classes.link}>
                                 Now Playing
                             </Link>
                             <Link color="secondary" href="/all-movies" className={classes.link}>
