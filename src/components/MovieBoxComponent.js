@@ -1,6 +1,6 @@
 import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import Link from "@material-ui/core/Link";
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -43,7 +43,7 @@ const MovieBoxComponent = ({movie}) => {
     const classes = useStyles();
 
     return (
-        <Link underline="none" href={`/movie-details/${movie.id}`}>
+        <Link underline="none" to={`/movie-details/${movie.id}`}>
             <div className={classes.root} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}>
                 <div className={classes.detailsContainer}>
                     <span className={classes.title}>{movie.title}</span>

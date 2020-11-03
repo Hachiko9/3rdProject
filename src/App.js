@@ -22,8 +22,8 @@ function App() {
       <ThemeProvider theme={theme}>
           <CssBaseline />
           <div className="App">
-              <NavbarComponent />
               <BrowserRouter>
+                  <NavbarComponent />
                   <Route exact path="/" render={() => < Home/>} />
                   <Route exact path="/all-movies" render={() => <AllMoviesPage />} />
                   <Route exact path="/movie-details/:movieId" render={() => <MovieDetailsPage />} />
@@ -32,12 +32,12 @@ function App() {
                   <Route exact path="/profile" render={() => <Profile />} />
                   <Route exact path="/login" render={() => <LoginPage />} />
                   <Route exact path="/signup" render={() => <SignupPage />} />
+                  <Route exact path="/now-playing" render={() => <NowPlayingPage />} />
                   {/*/!*  Backlog  *!/*/}
                   {/*<Route exact path="/fun-facts" render={() => <FunFacts />} />*/}
                   {/*<Route exact path="/random-movie" render={() => <RandomMovie />} />*/}
                   {/*<Route exact path="/must-watch" render={() => <MustWatch />} />*/}
                   {/*<Route exact path="/about" render={() => <About />} />*/}
-                  <Route exact path="/now-playing" render={() => <NowPlayingPage />} />
               </BrowserRouter>
           </div>
       </ThemeProvider>

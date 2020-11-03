@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import NowPlayingComponent from "../components/NowPlayingComponent";
 import {nowPlaying} from "../services/MoviesService";
 import {getMovies} from "../services/MoviesService";
-import Link from "@material-ui/core/Link";
 import AllMoviesComponent from "../components/AllMoviesComponent";
+import {Link} from "react-router-dom";
 
 const Home = () => {
     const [ npMovies, setNPMovies ] = useState([]);
@@ -18,11 +18,11 @@ const Home = () => {
         <div id="home">
             <section>
                 <NowPlayingComponent movies={npMovies}/>
-                <Link href={'/now-playing'}>See more...</Link>
+                <Link to={'/now-playing'}>See more...</Link>
             </section>
             <section>
                 <AllMoviesComponent movies={allMovies}/>
-                <Link href={'/all-movies'}>See more...</Link>
+                <Link to={'/all-movies'}>See more...</Link>
             </section>
         </div>
     );

@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Link from "@material-ui/core/Link";
 import SearchComponent from "./SearchComponent";
 import {logout} from "../services/UserService";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,7 +49,7 @@ const NavbarComponent = () => {
         <div className={classes.root}>
             <AppBar position="static">
                 <Toolbar className={classes.toolbar}>
-                    <Link href={'/'}>
+                    <Link to={'/'}>
                         <Typography className={classes.title} variant="h5" noWrap>
                             The BBB club
                         </Typography>
@@ -59,10 +59,10 @@ const NavbarComponent = () => {
                             <Link color="secondary" to="/now-playing" className={classes.link}>
                                 Now Playing
                             </Link>
-                            <Link color="secondary" href="/all-movies" className={classes.link}>
+                            <Link color="secondary" to="/all-movies" className={classes.link}>
                                 All Movies
                             </Link>
-                            <Link color="secondary" href="/profile" className={classes.link}>
+                            <Link color="secondary" to="/profile" className={classes.link}>
                                 Profile
                             </Link>
                         </div>
