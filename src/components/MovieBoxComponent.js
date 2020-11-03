@@ -6,7 +6,7 @@ import Link from "@material-ui/core/Link";
 const useStyles = makeStyles((theme) => ({
     root: {
         backgroundRepeat: 'no-repeat',
-        width: 300,
+        width: '100%',
         height: 170,
         backgroundSize: 'cover',
         color: 'white',
@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 600,
         height: '30%',
         paddingLeft: 16,
-        width: '100%'
+        width: '100%',
+        '&:hover': {
+            textDecoration: 'none'
+        }
     },
     title: {
         overflow: 'hidden',
@@ -40,7 +43,7 @@ const MovieBoxComponent = ({movie}) => {
     const classes = useStyles();
 
     return (
-        <Link href={`/movie-details/${movie.id}`}>
+        <Link underline="none" href={`/movie-details/${movie.id}`}>
             <div className={classes.root} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${movie.poster_path})`}}>
                 <div className={classes.detailsContainer}>
                     <span className={classes.title}>{movie.title}</span>
