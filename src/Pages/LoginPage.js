@@ -7,7 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundColor: 'url(https://wallpapercave.com/wp/wp2392657.jpg)',
+        background: 'url(https://wallpapercave.com/wp/wp2392657.jpg)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
     },
     form: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        backgroundColor: theme.palette.background.default
     },
     field: {
         margin: 10,
-        backgroundColor: 'white'
     }
 }));
 
@@ -39,7 +39,7 @@ const LoginPage = () => {
     return (
         <div className={classes.root}>
             <form className={classes.form} autoComplete="off">
-                <TextField className={classes.field} id="email" label="Email" type="email" variant="outlined" onChange={(ev) => setEmail(ev.target.value)} />
+                <TextField className={classes.field} id="email" label="Email" type="email" color="secondary" variant="outlined" onChange={(ev) => setEmail(ev.target.value)} />
                 <TextField className={classes.field} id="password" label="Password" type="password" variant="outlined" onChange={(ev) => setPassword(ev.target.value)} />
                 <Button className={classes.field} variant="outlined" color="primary" onClick={handleSubmit}>
                     Login

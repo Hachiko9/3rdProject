@@ -1,10 +1,8 @@
 import React from 'react';
+import theme from "./theme";
 import './App.css';
 import NavbarComponent from "./components/NavbarComponent";
-import CarouselComponent from './components/CarouselComponent'
-import NowPlayingComponent from "./components/NowPlayingComponent";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import theme from "./theme";
 import {ThemeProvider} from  '@material-ui/core/styles'
 import { BrowserRouter, Route } from 'react-router-dom';
 import Home from "./Pages/Home";

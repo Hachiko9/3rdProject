@@ -1,11 +1,6 @@
 import responsiveFontSizes from '@material-ui/core/styles/responsiveFontSizes';
 import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import createPalette from '@material-ui/core/styles/createPalette';
-// import fonts from './styles/fonts';
-
-// import {
-//
-// } from './styles/colors';
 
 
 const theme = responsiveFontSizes(createMuiTheme({
@@ -14,20 +9,42 @@ const theme = responsiveFontSizes(createMuiTheme({
             minHeight: 128
         }
     },
-    // overrides: {
+    overrides: {
+        MuiButtonBase: {
+            root: {
+                "&:hover": {
+                    backgroundColor: 'transparent !important',
+                },
+            }
+        }
     //     MuiCssBaseline: {
     //         '@global': {
     //             '@font-face': Object.keys(fonts)
     //                 .map((font) => fonts[font])
     //         }
     //     }
-    // },
+    },
     palette: createPalette({
         type: 'dark',
         common: {
             transparent: 'transparent'
+        },
+        primary: {
+            main: '#ff0000'
+        },
+        secondary: {
+            main: '#fafafa'
+        },
+        background: {
+            default: '#252525',
+            paper: '#414141'
         }
     }),
+    props: {
+        MuiButtonBase: {
+            disableRipple: true
+        },
+    },
     typography: {
         fontSize: 16,
         fontWeightLight: 300,

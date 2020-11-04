@@ -15,7 +15,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div id="home">
+        <div id="home" style={{textAlign: 'center'}}>
             <section>
                 <NowPlayingComponent movies={npMovies}/>
                 <Link to={'/now-playing'}>See more...</Link>

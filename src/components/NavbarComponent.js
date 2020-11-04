@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(2),
-        backgroundColor: theme.palette.background.default
+        // backgroundColor: '#252525'
     },
     actionsContainer: {
         width: '100%',
@@ -32,9 +32,8 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between'
     },
     link: {
-        paddingRight: 20,
         fontSize: 22,
-        color: 'white'
+        paddingRight: 20
     }
 }));
 
@@ -47,7 +46,7 @@ const NavbarComponent = () => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="static" color={'transparent'} elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <Link to={'/'}>
                         <Typography className={classes.title} variant="h5" noWrap>
@@ -56,13 +55,13 @@ const NavbarComponent = () => {
                     </Link>
                     <div className={classes.actionsContainer}>
                         <div>
-                            <Link color="secondary" to="/now-playing" className={classes.link}>
+                            <Link to="/now-playing" className={classes.link}>
                                 Now Playing
                             </Link>
-                            <Link color="secondary" to="/all-movies" className={classes.link}>
+                            <Link to="/all-movies" className={classes.link}>
                                 All Movies
                             </Link>
-                            <Link color="secondary" to="/profile" className={classes.link}>
+                            <Link to="/profile" className={classes.link}>
                                 Profile
                             </Link>
                         </div>
