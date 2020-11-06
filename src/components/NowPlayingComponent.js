@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
         margin: 50,
         fontSize: 36,
         fontWeight: 400,
-        marginTop: 12
+        marginTop: 12,
+        textAlign: 'center'
     }
 }));
 

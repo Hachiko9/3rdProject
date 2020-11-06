@@ -3,35 +3,44 @@ import {makeStyles} from "@material-ui/core/styles";
 import Link from "@material-ui/core/Link";
 import Button from "@material-ui/core/Button";
 import {deleteReview} from "../services/ReviewService";
+import Divider from "@material-ui/core/Divider";
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        backgroundRepeat: 'no-repeat',
-        width: 300,
-        height: 170,
-        backgroundSize: 'cover',
         color: 'white',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end',
         alignItems: 'flex-start'
 
+    },
+    divider: {
+        width: '55%',
+        color: 'red',
+        height: -10,
+        backgroundColor: theme.palette.primary.main,
+        margin: '80px auto'
     }
 }));
 
 const ReviewComponent = ({handleDelete, review}) => {
     const classes = useStyles();
+    const user = JSON.parse(localStorage.getItem('user'));
+    const canDelete = review.author === user._id || review.author === user.username;
 
     return (
-       // <Link href={`/review-edit/${review.id}`}>
-            <div className={classes.root}>
-                <span>{review.author}</span>
-                <span>{review.content}</span>
+        // <Link href={`/review-edit/${review.id}`}>
+        <div className={classes.root}>
+            <p>Author: {review.author}</p>
+            <p>{review.content}</p>
+            {canDelete && (
                 <Button variant="outlined" color="primary" onClick={() => handleDelete(review._id)}>
                     Delete
                 </Button>
-            </div>
+            )}
+            <Divider variant="middle" className={classes.divider}/>
+        </div>
         //</Link>
 
     );

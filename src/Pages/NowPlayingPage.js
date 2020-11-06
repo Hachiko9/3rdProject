@@ -24,7 +24,7 @@ const NowPlayingPage = () => {
 
     return (
         <div>
-            <FilterComponent selectedGenres={selectedGenres} setGenre={setGenre} />
+            <FilterComponent selectedGenres={selectedGenres} setGenre={setGenre}/>
             <NowPlayingComponent movies={npMovies}/>
         </div>
     );

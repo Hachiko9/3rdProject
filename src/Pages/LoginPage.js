@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {login} from "../services/UserService";
 import {makeStyles} from "@material-ui/core/styles";
+import {getGenres, getLastMovieId, getMovieImage} from "../services/MoviesService";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,6 +30,16 @@ const LoginPage = () => {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     let history = useHistory();
+
+    // useEffect(() => {
+    //     getLastMovieId().then(id => getRandomImage(id));
+    // }, []);
+    //
+    // const getRandomImage = (maxId) => {
+    //     const randomId = Math.floor(Math.random() * (maxId + 1));
+    //     const image = getMovieImage(randomId)
+    //     console.log(image)
+    // }
 
     const handleSubmit = () => {
         login(email, password)

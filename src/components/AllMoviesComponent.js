@@ -6,8 +6,7 @@ import Divider from "./DividerComponent";
 const useStyles = makeStyles((theme) => ({
     root: {
         margin: 'auto',
-        width: '90%',
-        marginTop: 180
+        width: '90%'
     },
     grid: {
         display: 'grid',
@@ -19,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
         margin: 50,
         fontSize: 36,
         fontWeight: 400,
-        marginTop: 12
+        marginTop: 12,
+        textAlign: 'center'
     }
 }));
 

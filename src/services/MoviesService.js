@@ -58,3 +58,7 @@ export const getMoviesByFilter = (filters) => {
     return axios.get(url).then(res => res.data.results)
 }
 
+// export const getLastMovieId = () => {
+//     return axios.get(`https://api.themoviedb.org/3/movie/latest?api_key=${process.env.REACT_APP_TMDB_API_KEY}`)
+//         .then(res => res.data.id)
+// }

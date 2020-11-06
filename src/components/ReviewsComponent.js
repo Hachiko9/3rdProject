@@ -1,24 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {makeStyles} from "@material-ui/core/styles";
+import {makeStyles, useTheme} from "@material-ui/core/styles";
 import ReviewComponent from "./ReviewComponent";
 import {deleteReview, getReviewsByMovie} from "../services/ReviewService";
 import {useParams} from "react-router-dom";
-import {getMovie} from "../services/MoviesService";
+import Divider from "./DividerComponent";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        margin: 'auto',
-        width: '90%'
+        marginLeft: 24,
     },
-    grid: {
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-        gridGap: '1rem'
-    }
 }));
 
 const ReviewsComponent = () => {
     const classes = useStyles();
+    const theme = useTheme();
+
     const [ reviews, setReviews ] = useState([]);
     const {movieId} = useParams();
     const user = JSON.parse(localStorage.getItem('user'))
@@ -34,15 +30,19 @@ const ReviewsComponent = () => {
         }).catch(err => console.log(err))
     }
 
-
     return (
         <div className={classes.root}>
-            <h2>All reviewes</h2>
-            <div className={classes.grid}>
-                {reviews.length > 0 && reviews.map(review =>
-                    <ReviewComponent key={review.id} review={review} handleDelete={handleDelete}/>
-                )}
+            {reviews.length > 0 &&
+            <div>
+                <Divider/>
+                <h3 style={{color: theme.palette.primary.main}}>Reviews</h3>
+                <div className={classes.grid}>
+                    {reviews.length > 0 && reviews.map(review =>
+                        <ReviewComponent key={review.id} review={review} handleDelete={handleDelete}/>
+                    )}
+                </div>
             </div>
+            }
         </div>
     );
 }
