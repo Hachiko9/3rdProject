@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch } from 'react-router-dom';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import ProtectedRoute from "./ProtectedRoute";
 import PublicRoute from "./PublicRoute";
@@ -26,6 +26,7 @@ const Routes = () => (
         <ProtectedRoute exact path="/:movieId/reviews/:reviewId/edit" Component={ReviewFormPage} />
         <ProtectedRoute exact path="/:movieId/reviews/:reviewId/edit" Component={ReviewFormPage} />
         <ProtectedRoute exact path="/profile" Component={Profile} />
+
         {/*/!*  Backlog  *!/*/}
         {/*<Route exact path="/fun-facts" render={() => <FunFacts />} />*/}
         {/*<Route exact path="/random-movie" render={() => <RandomMovie />} />*/}

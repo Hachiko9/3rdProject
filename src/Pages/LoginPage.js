@@ -27,6 +27,16 @@ const useStyles = makeStyles((theme) => ({
     },
     field: {
         margin: 10,
+    },
+    text: {
+        opacity: 1,
+        transition: 'opacity .3s',
+        position: 'absolute',
+        right: '6%',
+        top: '15%',
+        fontFamily: 'Dancing Script, cursive',
+        letterSpacing: 3,
+        textShadow: '3px 2px 2px black'
     }
 }));
 
@@ -48,12 +58,18 @@ const LoginPage = () => {
 
     const handleSubmit = () => {
         login(email, password)
-            .then(() => history.push('/'))
+            .then(() => {
+                document.getElementById('text').style.opacity = 1;
+                setTimeout(() => {
+                    history.push('/')
+                },1500)
+            })
             .catch(err => console.log(err));
     }
 
     return (
         <div className={classes.root}>
+            <h1 id="text" className={classes.text}>"I can't remember anything <br/>without you."</h1>
             <form className={classes.form} autoComplete="off">
                 <TextField className={classes.field} id="email" label="Email" type="email" color="secondary" variant="outlined" onChange={(ev) => setEmail(ev.target.value)} />
                 <TextField className={classes.field} id="password" label="Password" type="password" variant="outlined" onChange={(ev) => setPassword(ev.target.value)} />

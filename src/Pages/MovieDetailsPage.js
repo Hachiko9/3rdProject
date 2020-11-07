@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     movieContainer: {
         background: 'rgba(0, 0, 0, .8)',
         borderRadius: 8,
-        bottom: '10%',
+        marginBottom: 32,
         display: 'flex',
         height: '80vh',
         margin: 'auto',
@@ -50,7 +50,7 @@ const MovieDetailsPage = () => {
 
     const [movie, setMovie] = useState({});
     const {movieId} = useParams();
-    console.log('MDP ', movieId);
+
     useEffect(() => {
         getMovie(movieId).then(movie => {
             const date = new Date(movie.release_date)
@@ -60,6 +60,8 @@ const MovieDetailsPage = () => {
                 release_date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
             });
         });
+
+
     }, []);
 
     return (

@@ -9,7 +9,9 @@ import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1
+        flexGrow: 1,
+        position: 'sticky',
+        top: -146,
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -19,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-around',
         paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(2),
+        paddingBottom: theme.spacing(1),
     },
     actionsContainer: {
         width: '100%',
@@ -33,15 +35,16 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NavbarComponent = ({user}) => {
+const NavbarComponent = ({path, user}) => {
     const classes = useStyles();
+    const isMovieDetailPage = (/(movie-details)/gi).test(path);
 
     const handleLogout = () => {
         logout().then(() => document.location.reload()).catch(err => console.log(err));
     }
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} style={{backgroundColor: isMovieDetailPage ? 'transparent' : '#252525'}}>
             <AppBar position="static" color={'transparent'} elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <Link to={'/'}>

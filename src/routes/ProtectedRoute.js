@@ -2,14 +2,14 @@ import React from "react";
 import {Route, Redirect} from "react-router-dom";
 import NavbarComponent from "../components/NavbarComponent";
 
-const ProtectedRoute = ({ Component }) => {
+const ProtectedRoute = ({ Component, ...rest }) => {
     const user = JSON.parse(localStorage.getItem('user'))
 
     if (user) {
         return (
             <div>
-                <NavbarComponent user={user}/>
-                <Route render={(otherProps) => (<Component {...otherProps} user={user}/>)}/>
+                <NavbarComponent {...rest} user={user}/>
+                <Route {...rest} render={(otherProps) => (<Component {...otherProps} user={user}/>)}/>
             </div>
         );
     }

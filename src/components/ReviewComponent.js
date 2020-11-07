@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ReviewComponent = ({handleDelete, review, user}) => {
     const classes = useStyles();
-    const canDelete = review.author === user._id || review.author === user.username;
+    const canDelete = user && (review.author === user._id || review.author === user.username);
 
     return (
         // <Link href={`/review-edit/${review.id}`}>
