@@ -11,14 +11,19 @@ const useStyles = makeStyles((theme) => ({
         background: 'url(https://wallpapercave.com/wp/wp2392657.jpg)',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'baseline',
         justifyContent: 'center',
-        height: 'calc(100vh - 142px)'
+        height: '100vh',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%'
     },
     form: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: theme.palette.background.default
+        borderRadius: 8,
+        padding: 24,
+        background: 'rgba(0, 0, 0, .8)',
+        marginLeft: 180
     },
     field: {
         margin: 10,

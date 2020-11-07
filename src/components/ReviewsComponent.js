@@ -11,13 +11,12 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ReviewsComponent = () => {
+const ReviewsComponent = ({user}) => {
     const classes = useStyles();
     const theme = useTheme();
 
     const [ reviews, setReviews ] = useState([]);
     const {movieId} = useParams();
-    const user = JSON.parse(localStorage.getItem('user'))
 
     useEffect(() => {
         getReviewsByMovie(movieId).then(movie => setReviews(movie));

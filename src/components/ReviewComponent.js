@@ -24,9 +24,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const ReviewComponent = ({handleDelete, review}) => {
+const ReviewComponent = ({handleDelete, review, user}) => {
     const classes = useStyles();
-    const user = JSON.parse(localStorage.getItem('user'));
     const canDelete = review.author === user._id || review.author === user.username;
 
     return (

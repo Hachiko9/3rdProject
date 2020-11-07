@@ -50,7 +50,7 @@ const MovieDetailsPage = () => {
 
     const [movie, setMovie] = useState({});
     const {movieId} = useParams();
-
+    console.log('MDP ', movieId);
     useEffect(() => {
         getMovie(movieId).then(movie => {
             const date = new Date(movie.release_date)

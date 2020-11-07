@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const NavbarComponent = () => {
+const NavbarComponent = ({user}) => {
     const classes = useStyles();
 
     const handleLogout = () => {
@@ -55,16 +55,30 @@ const NavbarComponent = () => {
                             <Link to="/all-movies" className={classes.link}>
                                 All Movies
                             </Link>
-                            <Link to="/profile" className={classes.link}>
-                                Profile
-                            </Link>
+                            {user && (
+                                <Link to="/profile" className={classes.link}>
+                                    Profile
+                                </Link>
+                            )}
                         </div>
-                        <div>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            {user && (
+                                <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
+                                    Logout
+                                </IconButton>
+                            )}
+                            {!user && (
+                                <div>
+                                    <Link to="/login" className={classes.link}>
+                                        Login
+                                    </Link>
+                                    <Link to="/signup" className={classes.link}>
+                                        Signup
+                                    </Link>
+                                </div>
+                            )}
                             <IconButton aria-label="search" color="inherit">
                                 <SearchComponent />
-                            </IconButton>
-                            <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
-                                Logout
                             </IconButton>
                         </div>
                     </div>

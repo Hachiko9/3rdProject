@@ -2,11 +2,8 @@ import React, {useEffect, useState} from 'react';
 import ReviewsComponent from "../components/ReviewsComponent";
 import {getReviewsByUser} from "../services/ReviewService";
 
-const Profile = () => {
+const Profile = ({user}) => {
     const [ reviews, setReviews ] = useState({});
-
-    const user = JSON.parse(localStorage.getItem('user'));
-    console.log('user', user)
 
     useEffect(() => {
         getReviewsByUser(user._id).then(reviews => setReviews(reviews)).catch(err => console.log(err))

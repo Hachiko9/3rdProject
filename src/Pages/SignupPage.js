@@ -7,20 +7,38 @@ import {makeStyles} from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        background: 'url(https://ichef.bbci.co.uk/images/ic/1008xn/p05pg16w.jpg)',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        alignItems: 'baseline',
         justifyContent: 'center',
-        height: 'calc(100vh - 142px)'
+        height: '100vh',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '100%'
     },
     form: {
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        borderRadius: 8,
+        padding: 24,
+        background: 'rgba(0, 0, 0, .8)',
+        marginLeft: 180
     },
     field: {
-        margin: 10
+        margin: 10,
+    },
+    text: {
+        opacity: 0,
+        transition: 'opacity .3s',
+        position: 'absolute',
+        right: '6%',
+        top: '15%',
+        fontFamily: 'Dancing Script, cursive',
+        letterSpacing: 3,
+        textShadow: '3px 2px 2px black'
     }
 }));
+
 
 const SignupPage = () => {
     const classes = useStyles();
@@ -40,12 +58,18 @@ const SignupPage = () => {
 
     const handleSubmit = () => {
         signup(email, password, username)
-            .then(() => history.push('/'))
+            .then(() => {
+                document.getElementById('text').style.opacity = 1;
+                setTimeout(() => {
+                    history.push('/')
+                }, 1500)
+            })
             .catch(err => console.log(err));
     }
 
     return (
         <div className={classes.root}>
+            <h1 id="text" className={classes.text}>"Louis, I think this is the beginning of a <br/>beautiful friendship."</h1>
             <form autoComplete="off" className={classes.form}>
                 <TextField className={classes.field} id="username" label="Username" variant="outlined" onChange={(ev) => setUsername(ev.target.value)} />
                 <TextField className={classes.field} id="email" label="Email" type="email" variant="outlined" error={checkEmail()} onChange={(ev) => setEmail(ev.target.value)} />

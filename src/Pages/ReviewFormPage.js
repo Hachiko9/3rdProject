@@ -4,13 +4,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {addReview, editReview} from "../services/ReviewService";
 
-const ReviewFormPage = ({review}) => {
+const ReviewFormPage = ({review, user}) => {
     const [ content, setContent ] = useState('');
     const [ score, setScore ] = useState(null);
     const {movieId} = useParams();
 
     const handleSubmit = () => {
-        const user = JSON.parse(localStorage.getItem('user'))
         if (review) {
             const updatedReview  = {
                 ...review,
