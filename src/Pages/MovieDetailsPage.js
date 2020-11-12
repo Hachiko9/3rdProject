@@ -3,6 +3,13 @@ import {useParams} from 'react-router-dom';
 import {getMovie} from "../services/MoviesService";
 import ReviewsComponent from "../components/ReviewsComponent";
 import {makeStyles} from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import ReviewFormComponent from "../components/ReviewFormComponent";
+import AuthenticateDialog from "../components/AuthenticateDialog";
+import DeleteIcon from '@material-ui/icons/Delete';
+import AddIcon from '@material-ui/icons/Add';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import {addFavouriteMovie} from "../services/UserService";
 
 const useStyles = makeStyles((theme) => ({
     imgCover: {
@@ -42,13 +49,22 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: theme.palette.primary.main,
         textShadow: '3px 1px 4px black'
+    },
+    btn: {
+        width: '100%',
+        marginTop: 8,
+        '&:hover': {
+            color: theme.palette.primary.main,
+            borderColor: theme.palette.primary.main
+        }
     }
 }));
 
-const MovieDetailsPage = () => {
+const MovieDetailsPage = ({user}) => {
     const classes = useStyles();
-
+    const [showForm, setShowForm] = useState(false);
     const [movie, setMovie] = useState({});
+    const [open, setOpen] = useState(false);
     const {movieId} = useParams();
 
     useEffect(() => {
@@ -62,7 +78,27 @@ const MovieDetailsPage = () => {
         });
 
 
-    }, []);
+    }, [movieId]);
+
+    const toggleForm = () => {
+        if (user) {
+            setShowForm(!showForm);
+        } else {
+            setOpen(true);
+        }
+    }
+
+    const getFavouriteBtnLabel = () => {
+        return user && !user.favouriteMoviesIds.includes(movie.id) ? 'ADD TO FAVOURITES' : 'REMOVE FROM FAVOURITES'
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
+
+    const addFavourite = () => {
+        addFavouriteMovie(user._id, movie.id).then(res => getFavouriteBtnLabel()).catch(err => console.log(err))
+    }
 
     return (
         <>
@@ -70,27 +106,41 @@ const MovieDetailsPage = () => {
                 <div className={classes.root}
                      style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`}}>
                     <div className={classes.movieContainer}>
-                        <img
-                            className={classes.imgCover}
-                            src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                        />
-                        <div>
-                            <div className={classes.infoContainer}>
-                                <h1 className={classes.title}>{movie.title}</h1>
-                                <div className={classes.infoGrid}>
-                                    <span>Score:</span>
-                                    <span>{movie.vote_average}</span>
-                                    <span>Release date:</span>
-                                    <span>{movie.release_date}</span>
-                                </div>
-                                <div style={{margin: '30px 0 100px'}}>
-                                    <h3>Summary:</h3>
-                                    <span className={classes.text}>{movie.overview}</span>
-                                </div>
-                            </div>
-                            <ReviewsComponent/>
+                        <div style={{width: 220}}>
+                            <img
+                                className={classes.imgCover}
+                                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                            />
+                            <Button className={classes.btn} variant="outlined" color="secondary"
+                                    onClick={toggleForm} startIcon={showForm ? <DeleteIcon /> : <AddIcon />}>
+                                {showForm ? 'Discard' : 'Add a review'}
+                            </Button>
+                            <Button className={classes.btn} variant="outlined" color="secondary"
+                                    onClick={addFavourite} startIcon={<FavoriteBorderIcon />}>
+                                {getFavouriteBtnLabel()}
+                            </Button>
                         </div>
+                        { showForm && <ReviewFormComponent user={user} toggleForm={toggleForm}/>}
+                        { !showForm && (
+                            <div>
+                                <div className={classes.infoContainer}>
+                                    <h1 className={classes.title}>{movie.title}</h1>
+                                    <div className={classes.infoGrid}>
+                                        <span>Score:</span>
+                                        <span>{movie.vote_average}</span>
+                                        <span>Release date:</span>
+                                        <span>{movie.release_date}</span>
+                                    </div>
+                                    <div style={{margin: '30px 0 100px'}}>
+                                        <h3>Summary:</h3>
+                                        <span className={classes.text}>{movie.overview}</span>
+                                    </div>
+                                </div>
+                                <ReviewsComponent />
+                            </div>
+                        )}
                     </div>
+                    <AuthenticateDialog open={open} onClose={handleClose} />
 
                 </div>
             )}

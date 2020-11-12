@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import ReviewComponent from "./ReviewComponent";
-import {deleteReview, getReviewsByMovie} from "../services/ReviewService";
+import {deleteReview, mergeReviewsByMovies} from "../services/ReviewService";
 import {useParams} from "react-router-dom";
 import Divider from "./DividerComponent";
 
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ReviewsComponent = ({user}) => {
+const ReviewsComponent = ({reviewsByUser, user}) => {
     const classes = useStyles();
     const theme = useTheme();
 
@@ -19,7 +19,11 @@ const ReviewsComponent = ({user}) => {
     const {movieId} = useParams();
 
     useEffect(() => {
-        getReviewsByMovie(movieId).then(movie => setReviews(movie));
+        if (!reviewsByUser) {
+            mergeReviewsByMovies(movieId).then(reviews => setReviews(reviews));
+        } else {
+            setReviews(reviewsByUser)
+        }
     }, []);
 
     const handleDelete = (reviewId) => {
@@ -34,10 +38,10 @@ const ReviewsComponent = ({user}) => {
             {reviews.length > 0 &&
             <div>
                 <Divider/>
-                <h3 style={{color: theme.palette.primary.main}}>Reviews</h3>
+                <h3 style={{color: theme.palette.primary.main, textAlign: 'center'}}>Reviews</h3>
                 <div className={classes.grid}>
                     {reviews.length > 0 && reviews.map(review =>
-                        <ReviewComponent key={review.id} review={review} handleDelete={handleDelete}/>
+                        <ReviewComponent key={review.id || review._id} review={review} handleDelete={handleDelete}/>
                     )}
                 </div>
             </div>

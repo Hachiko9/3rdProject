@@ -36,7 +36,7 @@ const theme = responsiveFontSizes(createMuiTheme({
             main: '#fafafa'
         },
         background: {
-            default: '#252525',
+            default: '#07131f',
             paper: '#414141'
         }
     }),

@@ -29,14 +29,15 @@ const useStyles = makeStyles((theme) => ({
         margin: 10,
     },
     text: {
-        opacity: 1,
+        color: 'black',
+        opacity: 0,
         transition: 'opacity .3s',
         position: 'absolute',
-        right: '6%',
-        top: '15%',
-        fontFamily: 'Dancing Script, cursive',
-        letterSpacing: 3,
-        textShadow: '3px 2px 2px black'
+        bottom: '20%',
+        right: '2%',
+        fontFamily: 'Amatic SC, cursive',
+        letterSpacing: 5,
+        textShadow: '3px 2px 2px white'
     }
 }));
 

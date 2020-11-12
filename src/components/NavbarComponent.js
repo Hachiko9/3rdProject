@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import SearchComponent from "./SearchComponent";
 import {logout} from "../services/UserService";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
+import {getLastMovieId, getMovie} from "../services/MoviesService";
+import {Button} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-around',
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(1),
+        textShadow: '2px 2px 1px black'
     },
     actionsContainer: {
         width: '100%',
@@ -32,32 +35,58 @@ const useStyles = makeStyles((theme) => ({
     link: {
         fontSize: 22,
         paddingRight: 20
+    },
+    linkFromBtn: {
+        fontSize: 22,
+        paddingRight: 20,
+        textTransform: 'none',
+        textShadow: '2px 2px 1px black',
+        '&:hover': {
+            color: theme.palette.primary.main
+        }
     }
 }));
 
 const NavbarComponent = ({path, user}) => {
     const classes = useStyles();
+    const [randomId, setRandomId] = useState(0);
     const isMovieDetailPage = (/(movie-details)/gi).test(path);
+    const isProfilePage = (/(profile)/gi).test(path);
 
     const handleLogout = () => {
         logout().then(() => document.location.reload()).catch(err => console.log(err));
     }
 
+    const getRandomMovieId = () => {
+        getLastMovieId().then(lastMovie => {
+            const randomId = Math.floor(Math.random() * lastMovie);
+            getMovie(randomId)
+                .then((movie) => (movie.backdrop_path && !movie.adult) ? setRandomId(movie.id) : getRandomMovieId())
+                .catch(() => getRandomMovieId());
+        });
+    }
+
     return (
-        <div className={classes.root} style={{backgroundColor: isMovieDetailPage ? 'transparent' : '#252525'}}>
+        <div className={classes.root} style={{backgroundColor: isMovieDetailPage || isProfilePage ? 'transparent' : '#07131f'}}>
             <AppBar position="static" color={'transparent'} elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <Link to={'/'}>
                         <img height={140} src={'/logo.png'} alt=""/>
                     </Link>
                     <div className={classes.actionsContainer}>
-                        <div>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
                             <Link to="/now-playing" className={classes.link}>
-                                Now Playing
+                                Now playing
                             </Link>
                             <Link to="/all-movies" className={classes.link}>
-                                All Movies
+                                All movies
                             </Link>
+                            <Button className={classes.linkFromBtn} onClick={getRandomMovieId}>
+                                Random movie
+                            </Button>
+                            {randomId > 0 &&
+                                <Redirect to={`/movie-details/${randomId}`}/>
+                            }
                             {user && (
                                 <Link to="/profile" className={classes.link}>
                                     Profile
@@ -66,7 +95,7 @@ const NavbarComponent = ({path, user}) => {
                         </div>
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             {user && (
-                                <IconButton aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
+                                <IconButton className={classes.linkFromBtn} aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
                                     Logout
                                 </IconButton>
                             )}

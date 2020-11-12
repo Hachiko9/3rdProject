@@ -29,3 +29,8 @@ export const logout = () => {
         })
         .catch(err => err);
 }
+
+export const addFavouriteMovie = (userId, movieId) => {
+    return axios.post(`http://localhost:5000/user/${userId}/like`, {movieId})
+        .then(res => res.data)
+}

@@ -5,22 +5,36 @@ export const getReviewsByMovie = (movieId) => {
         .then(res => res.data.results)
 }
 
-export const getReviewsByUser= (userId) => {
-    return axios.get(`http://localhost:5000/reviews/user/${userId}`)
+export const getReviewsByUser = (author) => {
+    return axios.get(`http://localhost:5000/reviews/user/${author}`)
         .then(res => res.data.reviews)
 }
 
-export const addReview= (userId, review) => {
+export const getReviewsByMovieFromInternal = (movieId) => {
+    return axios.get(`http://localhost:5000/reviews/movies/${movieId}`)
+        .then(res => res.data.reviews)
+}
+
+export const addReview = (userId, review) => {
     return axios.post(`http://localhost:5000/reviews/user/${userId}/add`, review)
         .then(res => res.data)
 }
 
-export const editReview= (userId, review, reviewId) => {
+export const editReview = (userId, review, reviewId) => {
     return axios.put(`http://localhost:5000/reviews/${reviewId}/user/${userId}`, review)
         .then(res => res.data)
 }
 
-export const deleteReview= (userId, reviewId) => {
+export const deleteReview = (userId, reviewId) => {
     return axios.delete(`http://localhost:5000/reviews/${reviewId}/user/${userId}/delete`)
         .then(res => res.data)
+}
+
+export const mergeReviewsByMovies = async (movieId) => {
+    let internal, external;
+
+    await getReviewsByMovie(movieId).then(rv => external = rv);
+    await getReviewsByMovieFromInternal(movieId).then(rv => internal = rv);
+
+    return [...internal, ...external];
 }
