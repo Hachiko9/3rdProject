@@ -89,7 +89,7 @@ const MovieDetailsPage = ({setUser, user}) => {
         return (
             Object.keys(user).length === 0 ||
             (
-                Object.keys(user).length > 0 && !user.favouriteMoviesIds.includes(movieId)
+                Object.keys(user).length > 0 && user.favouriteMoviesIds && !user.favouriteMoviesIds.includes(movieId)
             ) ?
             'ADD TO FAVOURITES' : 'REMOVE FROM FAVOURITES'
         )

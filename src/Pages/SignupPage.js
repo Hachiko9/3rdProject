@@ -61,6 +61,7 @@ const SignupPage = () => {
             .then((user) => {
                 document.getElementById('text').style.opacity = 1;
                 setTimeout(() => {
+                    console.log(user);
                     setUser(user);
                     history.push('/');
                 }, 1500)
