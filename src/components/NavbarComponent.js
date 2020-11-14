@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import {makeStyles} from '@material-ui/core/styles';
 import SearchComponent from "./SearchComponent";
 import {logout} from "../services/UserService";
-import {Link, Redirect} from "react-router-dom";
+import {Link, Redirect, useHistory} from "react-router-dom";
 import {getLastMovieId, getMovie} from "../services/MoviesService";
 import {Button} from "@material-ui/core";
 
@@ -58,10 +58,17 @@ const NavbarComponent = ({path, user}) => {
     const isMovieDetailPage = (/(movie-details)/gi).test(path);
     const isProfilePage = (/(profile)/gi).test(path);
     const isSmall = isMovieDetailPage || isProfilePage;
-    const isLoggedIn = user && Object.keys(user).length > 0;
+    const isProtectedState = user && Object.keys(user).length > 0;
+    let history = useHistory();
 
     const handleLogout = () => {
-        logout(user._id).then(() => document.location.reload()).catch(err => console.log(err));
+        logout(user._id).then(() => {
+            // if (isProtectedState) {
+            //     history.push('/');
+            // }
+
+            document.location.reload()
+        }).catch(err => console.log(err));
     }
 
     const getRandomMovieId = () => {
@@ -99,19 +106,19 @@ const NavbarComponent = ({path, user}) => {
                             {randomId > 0 &&
                                 <Redirect to={`/movie-details/${randomId}`}/>
                             }
-                            {isLoggedIn && (
+                            {isProtectedState && (
                                 <Link to="/profile" className={classes.link}>
                                     Profile
                                 </Link>
                             )}
                         </div>
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            {isLoggedIn && (
+                            {isProtectedState && (
                                 <IconButton className={classes.linkFromBtn} aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
                                     Logout
                                 </IconButton>
                             )}
-                            {!isLoggedIn && (
+                            {!isProtectedState && (
                                 <div>
                                     <Link to="/login" className={classes.link}>
                                         Login

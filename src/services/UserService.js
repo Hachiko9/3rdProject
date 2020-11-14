@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const login = (email, password) => {
-    return axios.post('http://localhost:5000/user/login', {email, password})
+    return axios.post(`${process.env.REACT_APP_API_URL}user/login`, {email, password})
         .then(res => {
             localStorage.setItem('accessToken', res.data.accessToken);
             return res.data.user;
@@ -10,7 +10,7 @@ export const login = (email, password) => {
 }
 
 export const signup = (email, password, username) => {
-    return axios.post('http://localhost:5000/user/signup', {email, username, password})
+    return axios.post(`${process.env.REACT_APP_API_URL}user/signup`, {email, username, password})
         .then(res => {
             localStorage.setItem('accessToken', res.data.accessToken);
             return res.data.user;
@@ -19,8 +19,7 @@ export const signup = (email, password, username) => {
 }
 
 export const logout = (userId) => {
-    console.log(userId);
-    return axios.post('http://localhost:5000/user/logout', {userId})
+    return axios.post(`${process.env.REACT_APP_API_URL}user/logout`, {userId})
         .then(() => {
             localStorage.clear();
         })
@@ -30,7 +29,7 @@ export const logout = (userId) => {
 export const checkSession = () => {
     const token = localStorage.getItem('accessToken');
     if (token) {
-        return axios.get(`http://localhost:5000/user/session/${token}`)
+        return axios.get(`${process.env.REACT_APP_API_URL}user/session/${token}`)
             .then((res) => res.data.session.userId)
             .catch(err => err);
     }
@@ -39,6 +38,6 @@ export const checkSession = () => {
 }
 
 export const addFavouriteMovie = (userId, movieId) => {
-    return axios.post(`http://localhost:5000/user/${userId}/like`, {movieId})
+    return axios.post(`${process.env.REACT_APP_API_URL}user/${userId}/like`, {movieId})
         .then(res => res.data.user)
 }

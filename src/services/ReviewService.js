@@ -6,27 +6,27 @@ export const getReviewsByMovie = (movieId) => {
 }
 
 export const getReviewsByUser = (author) => {
-    return axios.get(`http://localhost:5000/reviews/user/${author}`)
+    return axios.get(`${process.env.REACT_APP_API_URL}reviews/user/${author}`)
         .then(res => res.data.reviews)
 }
 
 export const getReviewsByMovieFromInternal = (movieId) => {
-    return axios.get(`http://localhost:5000/reviews/movies/${movieId}`)
+    return axios.get(`${process.env.REACT_APP_API_URL}reviews/movies/${movieId}`)
         .then(res => res.data.reviews)
 }
 
 export const addReview = (userId, review) => {
-    return axios.post(`http://localhost:5000/reviews/user/${userId}/add`, review)
+    return axios.post(`${process.env.REACT_APP_API_URL}reviews/user/${userId}/add`, review)
         .then(res => res.data)
 }
 
 export const editReview = (userId, review, reviewId) => {
-    return axios.put(`http://localhost:5000/reviews/${reviewId}/user/${userId}`, review)
+    return axios.put(`${process.env.REACT_APP_API_URL}reviews/${reviewId}/user/${userId}`, review)
         .then(res => res.data)
 }
 
 export const deleteReview = (userId, reviewId) => {
-    return axios.delete(`http://localhost:5000/reviews/${reviewId}/user/${userId}/delete`)
+    return axios.delete(`${process.env.REACT_APP_API_URL}reviews/${reviewId}/user/${userId}/delete`)
         .then(res => res.data)
 }
 

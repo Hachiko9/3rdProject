@@ -3,7 +3,8 @@ import {Route, Redirect} from "react-router-dom";
 import NavbarComponent from "../components/NavbarComponent";
 
 const ProtectedRoute = ({ Component, ...rest }) => {
-    if (rest.user) {
+
+    if (Object.keys(rest.user).length) {
         return (
             <div>
                 <NavbarComponent {...rest} />
@@ -12,7 +13,7 @@ const ProtectedRoute = ({ Component, ...rest }) => {
         );
     }
 
-    return <Redirect to={{ pathname: '/login' }} />;
+    return <Redirect to={{ pathname: '/' }} />;
 };
 
 export default ProtectedRoute;
