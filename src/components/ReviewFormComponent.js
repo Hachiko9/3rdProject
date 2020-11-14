@@ -12,11 +12,15 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: 40
     },
     textField: {
-        width: 440,
-        height: 120
+        height: 300,
+        marginBottom: 12,
+        width: 440
+    },
+    scoreContainer: {
+        marginBottom: 24,
+        marginTop: 4
     },
     scoreField: {
-        margin: '20px 0',
         width: 100,
         height: 50
     }
@@ -62,8 +66,26 @@ const ReviewFormComponent = ({review, user, toggleForm, setUpdate}) => {
     return (
         <div>
             <form autoComplete="off" className={classes.root}>
-                <TextField InputProps={{className: classes.scoreField}} value={score}  id="score" label="Score" type="number" variant="outlined" onChange={(ev) => setScore(ev.target.value)} />
-                <TextField InputProps={{className: classes.textField,}} value={content} id="content" label="Review" type="text" variant="outlined" onChange={(ev)  => setContent(ev.target.value)} />
+                <TextField
+                    InputProps={{className: classes.scoreField}}
+                    classes={{root: classes.scoreContainer}}
+                    value={score}
+                    id="score"
+                    label="Score"
+                    type="number"
+                    variant="outlined"
+                    onChange={(ev) => setScore(ev.target.value)}
+                />
+                <TextField
+                    InputProps={{className: classes.textField}}
+                    value={content}
+                    id="content"
+                    label="Review"
+                    type="text"
+                    variant="outlined"
+                    multiline
+                    onChange={(ev)  => setContent(ev.target.value)}
+                />
                 <Button variant="outlined" color="primary" onClick={handleSubmit}>
                     Save
                 </Button>

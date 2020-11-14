@@ -14,11 +14,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import ScrollAnimatedComponent from "../components/ScrollAnimatedComponent";
 
 const useStyles = makeStyles((theme) => ({
-    imgCover: {
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain',
-        height: 300
-    },
     infoContainer: {
         display: 'flex',
         flexDirection: 'column',
@@ -108,20 +103,29 @@ const MovieDetailsPage = ({setUser, user}) => {
             {Object.keys(movie).length > 0 && (
                 <div className={classes.root}
                      id="movie-details-pg"
-                     style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`}}>
+                     style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`}}
+                >
                     <ScrollAnimatedComponent/>
+
                     <div className={classes.movieContainer}>
-                        <div style={{width: 220}}>
-                            <img
-                                className={classes.imgCover}
-                                src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                            />
-                            <Button className={classes.btn} variant="outlined" color="secondary"
-                                    onClick={toggleForm} startIcon={showForm ? <DeleteIcon /> : <AddIcon />}>
+                        <div style={{width: 200}}>
+                            <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt="movie poster"/>
+                            <Button
+                                className={classes.btn}
+                                variant="outlined"
+                                color="secondary"
+                                onClick={toggleForm}
+                                startIcon={showForm ? <DeleteIcon /> : <AddIcon />}
+                            >
                                 {showForm ? 'Discard' : 'Add a review'}
                             </Button>
-                            <Button className={classes.btn} variant="outlined" color="secondary"
-                                    onClick={addFavourite} startIcon={<FavoriteBorderIcon />}>
+                            <Button
+                                className={classes.btn}
+                                variant="outlined"
+                                color="secondary"
+                                onClick={addFavourite}
+                                startIcon={<FavoriteBorderIcon />}
+                            >
                                 {getFavouriteBtnLabel()}
                             </Button>
                         </div>
