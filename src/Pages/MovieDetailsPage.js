@@ -86,7 +86,13 @@ const MovieDetailsPage = ({setUser, user}) => {
     }
 
     const getFavouriteBtnLabel = () => {
-        return Object.keys(user).length && !user.favouriteMoviesIds.includes(movieId) ? 'ADD TO FAVOURITES' : 'REMOVE FROM FAVOURITES'
+        return (
+            Object.keys(user).length === 0 ||
+            (
+                Object.keys(user).length > 0 && !user.favouriteMoviesIds.includes(movieId)
+            ) ?
+            'ADD TO FAVOURITES' : 'REMOVE FROM FAVOURITES'
+        )
     }
 
     const handleClose = () => {
