@@ -13,7 +13,7 @@ const FavouriteMovieComponent = ({favMovieId}) => {
 
     useEffect(() => {
         getMovie(favMovieId).then(m => setFavMovie(m));
-    });
+    }, []);
 
     return (
         <div>

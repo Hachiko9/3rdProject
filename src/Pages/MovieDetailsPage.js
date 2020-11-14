@@ -58,11 +58,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MovieDetailsPage = ({setUser, user}) => {
+    const {movieId} = useParams();
     const classes = useStyles();
-    const [showForm, setShowForm] = useState(false);
+    const [message, setMessage] = useState('');
     const [movie, setMovie] = useState({});
     const [open, setOpen] = useState(false);
-    const {movieId} = useParams();
+    const [showForm, setShowForm] = useState(false);
 
     useEffect(() => {
         getMovie(movieId).then(movie => {
@@ -76,9 +77,10 @@ const MovieDetailsPage = ({setUser, user}) => {
     }, [movieId]);
 
     const toggleForm = () => {
-        if (user) {
+        if (Object.keys(user).length) {
             setShowForm(!showForm);
         } else {
+            setMessage('To leave a review you must be a registered user');
             setOpen(true);
         }
     }
@@ -92,10 +94,15 @@ const MovieDetailsPage = ({setUser, user}) => {
     }
 
     const addFavourite = () => {
-        addFavouriteMovie(user._id, movie.id).then((user) => {
-            setUser(user);
-            getFavouriteBtnLabel();
-        }).catch(err => console.log(err))
+        if (Object.keys(user).length) {
+            addFavouriteMovie(user._id, movie.id).then((user) => {
+                setUser(user);
+                getFavouriteBtnLabel();
+            }).catch(err => console.log(err));
+        } else {
+            setMessage('To add a favourite you must be a registered user');
+            setOpen(true);
+        }
     }
 
     return (
@@ -115,7 +122,7 @@ const MovieDetailsPage = ({setUser, user}) => {
                                 variant="outlined"
                                 color="secondary"
                                 onClick={toggleForm}
-                                startIcon={showForm ? <DeleteIcon /> : <AddIcon />}
+                                startIcon={showForm ? <DeleteIcon/> : <AddIcon/>}
                             >
                                 {showForm ? 'Discard' : 'Add a review'}
                             </Button>
@@ -124,13 +131,13 @@ const MovieDetailsPage = ({setUser, user}) => {
                                 variant="outlined"
                                 color="secondary"
                                 onClick={addFavourite}
-                                startIcon={<FavoriteBorderIcon />}
+                                startIcon={<FavoriteBorderIcon/>}
                             >
                                 {getFavouriteBtnLabel()}
                             </Button>
                         </div>
-                        { showForm && <ReviewFormComponent user={user} toggleForm={toggleForm}/>}
-                        { !showForm && (
+                        {showForm && <ReviewFormComponent user={user} toggleForm={toggleForm}/>}
+                        {!showForm && (
                             <div>
                                 <div className={classes.infoContainer}>
                                     <h1 className={classes.title}>{movie.title}</h1>
@@ -145,12 +152,12 @@ const MovieDetailsPage = ({setUser, user}) => {
                                         <span className={classes.text}>{movie.overview}</span>
                                     </div>
                                 </div>
-                                <ReviewsComponent />
+                                <ReviewsComponent/>
                             </div>
                         )}
                     </div>
-                    <AuthenticateDialog open={open} onClose={handleClose} />
 
+                    <AuthenticateDialog open={open} onClose={handleClose} message={message}/>
                 </div>
             )}
         </>

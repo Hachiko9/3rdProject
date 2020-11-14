@@ -97,7 +97,7 @@ const Profile = ({user}) => {
                     >
                         <Tab label="My reviews"/>
                         <Tab label="My favourite movies"/>
-                        <Tab label="My details"/>
+                        {/*<Tab label="My details"/>*/}
                     </Tabs>
                     <SwipeableViews
                         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -106,12 +106,12 @@ const Profile = ({user}) => {
                     >
                         <TabPanel index={0} dir={theme.direction} value={value}>
                             {reviews.length > 0 &&
-                            <UserReviewsComponent user={user} reviewsByUser={reviews}/>
+                                <UserReviewsComponent user={user} reviewsByUser={reviews}/>
                             }
                         </TabPanel>
                         <TabPanel index={1} dir={theme.direction} value={value}>
                             {user.favouriteMoviesIds.length > 0 &&
-                            <FavouriteMoviesComponent user={user}/>
+                                <FavouriteMoviesComponent user={user}/>
                             }
                         </TabPanel>
                         {/*<TabPanel index={2} dir={theme.direction} value={value}>
