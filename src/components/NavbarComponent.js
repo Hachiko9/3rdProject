@@ -5,7 +5,7 @@ import IconButton from '@material-ui/core/IconButton';
 import {makeStyles} from '@material-ui/core/styles';
 import SearchComponent from "./SearchComponent";
 import {logout} from "../services/UserService";
-import {Link, Redirect, useHistory} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import {getLastMovieId, getMovie} from "../services/MoviesService";
 import {Button} from "@material-ui/core";
 
@@ -59,14 +59,9 @@ const NavbarComponent = ({path, user}) => {
     const isProfilePage = (/(profile)/gi).test(path);
     const isSmall = isMovieDetailPage || isProfilePage;
     const isProtectedState = user && Object.keys(user).length > 0;
-    let history = useHistory();
 
     const handleLogout = () => {
         logout(user._id).then(() => {
-            // if (isProtectedState) {
-            //     history.push('/');
-            // }
-
             document.location.reload()
         }).catch(err => console.log(err));
     }
