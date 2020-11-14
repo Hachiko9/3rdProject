@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import {login} from "../services/UserService";
@@ -77,6 +77,12 @@ const LoginPage = () => {
                 <Button className={classes.field} variant="outlined" color="primary" onClick={handleSubmit}>
                     Login
                 </Button>
+                <div style={{margin: 8, textAlign: 'center', fontSize: 14}}>
+                    Don't have an account yet?<br/> Go to
+                    <Link to="/signup" className={classes.link}>
+                        &nbsp;signup
+                    </Link>
+                </div>
             </form>
         </div>
     );

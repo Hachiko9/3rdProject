@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import {signup} from "../services/UserService";
 import Button from "@material-ui/core/Button";
@@ -77,6 +77,12 @@ const SignupPage = () => {
                 <Button className={classes.field} variant="outlined" color="primary" onClick={handleSubmit}>
                     Signup
                 </Button>
+                <div style={{margin: 8, textAlign: 'center', fontSize: 14}}>
+                    Already have an account?<br/> Go to
+                    <Link to="/login" className={classes.link}>
+                        &nbsp;login
+                    </Link>
+                </div>
             </form>
         </div>
     );

@@ -6,7 +6,6 @@ import UserReviewComponent from "./UserReviewComponent";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginLeft: 24,
         marginTop: 24
     },
     title: {

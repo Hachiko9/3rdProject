@@ -11,7 +11,7 @@ import ReviewFormComponent from "./ReviewFormComponent";
 const useStyles = makeStyles((theme) => ({
     infoContainer: {
         display: 'flex',
-        margin: 80,
+        marginTop: 80,
         justifyContent: 'flex-start',
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain'

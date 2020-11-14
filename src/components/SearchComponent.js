@@ -12,10 +12,11 @@ const SearchComponent = () => {
 
     useEffect(() => {
         if (movieId) {
-            return setMovieId(null);
+            setMovieId(null);
+            setSearchedMovies([]);
+        } else {
+            setSearchedMovies([]);
         }
-
-        setSearchedMovies([]);
     }, [movieId])
 
     const search = (query) => {

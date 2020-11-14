@@ -10,6 +10,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import AddIcon from '@material-ui/icons/Add';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {addFavouriteMovie} from "../services/UserService";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import ScrollAnimatedComponent from "../components/ScrollAnimatedComponent";
 
 const useStyles = makeStyles((theme) => ({
     imgCover: {
@@ -34,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         height: '80vh',
         margin: 'auto',
-        marginTop: '100vh',
+        top: '100vh',
         overflow: 'scroll',
         padding: 24,
         position: 'relative',
@@ -104,7 +106,9 @@ const MovieDetailsPage = ({user}) => {
         <>
             {Object.keys(movie).length > 0 && (
                 <div className={classes.root}
+                     id="movie-details-pg"
                      style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`}}>
+                    <ScrollAnimatedComponent/>
                     <div className={classes.movieContainer}>
                         <div style={{width: 220}}>
                             <img

@@ -16,13 +16,13 @@ const Home = () => {
 
     return (
         <div id="home" style={{textAlign: 'center'}}>
-            <section>
+            <section style={{marginTop: 120, marginBottom: 30}}>
                 <NowPlayingComponent movies={npMovies}/>
-                <Link to={'/now-playing'}>See more...</Link>
+                <Link to={'/now-playing'}  style={{fontSize: 22}}>See more...</Link>
             </section>
-            <section>
+            <section style={{marginTop: 120, marginBottom: 30}}>
                 <AllMoviesComponent movies={allMovies}/>
-                <Link to={'/all-movies'}>See more...</Link>
+                <Link to={'/all-movies'} style={{fontSize: 22}}>See more...</Link>
             </section>
         </div>
     );

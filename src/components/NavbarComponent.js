@@ -11,9 +11,15 @@ import {Button} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        flexGrow: 1,
+        backgroundColor: '#07131f',
         position: 'sticky',
         top: -146,
+    },
+    rootSmall: {
+        backgroundColor: 'rgba(0, 0, 0,0.8)',
+        position: 'absolute',
+        top: -150,
+        width: '100%'
     },
     menuButton: {
         marginRight: theme.spacing(2),
@@ -33,11 +39,11 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between'
     },
     link: {
-        fontSize: 22,
+        fontSize: 24,
         paddingRight: 20
     },
     linkFromBtn: {
-        fontSize: 22,
+        fontSize: 24,
         paddingRight: 20,
         textTransform: 'none',
         textShadow: '2px 2px 1px black',
@@ -52,6 +58,7 @@ const NavbarComponent = ({path, user}) => {
     const [randomId, setRandomId] = useState(0);
     const isMovieDetailPage = (/(movie-details)/gi).test(path);
     const isProfilePage = (/(profile)/gi).test(path);
+    const isSmall = isMovieDetailPage || isProfilePage;
 
     const handleLogout = () => {
         logout().then(() => document.location.reload()).catch(err => console.log(err));
@@ -67,7 +74,7 @@ const NavbarComponent = ({path, user}) => {
     }
 
     return (
-        <div className={classes.root} style={{backgroundColor: isMovieDetailPage || isProfilePage ? 'transparent' : '#07131f'}}>
+        <div className={isSmall ? classes.rootSmall : classes.root} >
             <AppBar position="static" color={'transparent'} elevation={0}>
                 <Toolbar className={classes.toolbar}>
                     <Link to={'/'}>
@@ -75,6 +82,11 @@ const NavbarComponent = ({path, user}) => {
                     </Link>
                     <div className={classes.actionsContainer}>
                         <div style={{display: 'flex', alignItems: 'center'}}>
+                            {isSmall &&
+                            <Link to={'/'}>
+                                <img height={140} src={'/logo-mini.png'} alt="" style={{height: 80, marginRight: 30}}/>
+                            </Link>
+                                }
                             <Link to="/now-playing" className={classes.link}>
                                 Now playing
                             </Link>
