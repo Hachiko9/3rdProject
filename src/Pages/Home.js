@@ -16,7 +16,7 @@ const Home = () => {
 
     return (
         <div id="home" style={{textAlign: 'center'}}>
-            <section style={{marginTop: 120, marginBottom: 30}}>
+            <section style={{marginBottom: 30}}>
                 <NowPlayingComponent movies={npMovies}/>
                 <Link to={'/now-playing'}  style={{fontSize: 22}}>See more...</Link>
             </section>
