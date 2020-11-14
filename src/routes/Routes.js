@@ -12,17 +12,17 @@ import MovieDetailsPage from "../Pages/MovieDetailsPage";
 import NowPlayingPage from "../Pages/NowPlayingPage";
 import Profile from "../Pages/Profile";
 
-const Routes = () => (
+const Routes = (props) => (
     <Switch>
-        <PublicRoute exact path='/' Component={Home} />
-        <PublicRoute exact path='/login' Component={LoginPage} hideNav/>
-        <PublicRoute exact path="/signup" Component={SignupPage} hideNav/>
-        <PublicRoute exact path="/all-movies" Component={AllMoviesPage} />
-        <PublicRoute exact path="/movie-details/:movieId" Component={MovieDetailsPage} />
-        <PublicRoute exact path="/now-playing" Component={NowPlayingPage} />
+        <PublicRoute {...props} exact path='/' Component={Home} />
+        <PublicRoute {...props} exact path='/login' Component={LoginPage} hideNav />
+        <PublicRoute {...props} exact path="/signup" Component={SignupPage} hideNav />
+        <PublicRoute {...props} exact path="/all-movies" Component={AllMoviesPage} />
+        <PublicRoute {...props} exact path="/movie-details/:movieId" Component={MovieDetailsPage} />
+        <PublicRoute {...props} exact path="/now-playing" Component={NowPlayingPage} />
 
-        <ProtectedRoute exact path="/movie-details/:movieId/reviews/:reviewId/edit" Component={MovieDetailsPage} />
-        <ProtectedRoute exact path="/profile" Component={Profile} />
+        <ProtectedRoute {...props} exact path="/movie-details/:movieId/reviews/:reviewId/edit" Component={MovieDetailsPage} />
+        <ProtectedRoute {...props} exact path="/profile" Component={Profile} />
 
         {/*/!*  Backlog  *!/*/}
         {/*<Route exact path="/fun-facts" render={() => <FunFacts />} />*/}

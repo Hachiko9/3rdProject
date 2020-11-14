@@ -3,7 +3,6 @@ import {makeStyles, useTheme} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import {getMovie} from "../services/MoviesService";
-import ReviewsComponent from "./ReviewsComponent";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from '@material-ui/icons/Edit';
 import ReviewFormComponent from "./ReviewFormComponent";
@@ -11,10 +10,12 @@ import ReviewFormComponent from "./ReviewFormComponent";
 const useStyles = makeStyles((theme) => ({
     infoContainer: {
         display: 'flex',
-        marginTop: 80,
         justifyContent: 'flex-start',
         backgroundRepeat: 'no-repeat',
-        backgroundSize: 'contain'
+        backgroundSize: 'contain',
+        '&:not(:first-child)': {
+            marginTop: 80
+        }
     },
     textContainer: {
         marginLeft: 40,
@@ -63,7 +64,7 @@ const UserReviewComponent = ({handleDelete, review, user, movieId, setUpdate}) =
         <div>
             <div className={classes.infoContainer}>
                 <div className={classes.imageAndBtns}>
-                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}/>
+                    {movie.poster_path && <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}/>}
 
                     <div className={classes.actionsContainer}>
                         <Button variant="outlined" color="secondary" startIcon={<EditIcon/>}

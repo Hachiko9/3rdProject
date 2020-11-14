@@ -29,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'space-around',
         paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
         textShadow: '2px 2px 1px black'
     },
     actionsContainer: {
@@ -59,9 +58,10 @@ const NavbarComponent = ({path, user}) => {
     const isMovieDetailPage = (/(movie-details)/gi).test(path);
     const isProfilePage = (/(profile)/gi).test(path);
     const isSmall = isMovieDetailPage || isProfilePage;
+    const isLoggedIn = user && Object.keys(user).length > 0;
 
     const handleLogout = () => {
-        logout().then(() => document.location.reload()).catch(err => console.log(err));
+        logout(user._id).then(() => document.location.reload()).catch(err => console.log(err));
     }
 
     const getRandomMovieId = () => {
@@ -99,19 +99,19 @@ const NavbarComponent = ({path, user}) => {
                             {randomId > 0 &&
                                 <Redirect to={`/movie-details/${randomId}`}/>
                             }
-                            {user && (
+                            {isLoggedIn && (
                                 <Link to="/profile" className={classes.link}>
                                     Profile
                                 </Link>
                             )}
                         </div>
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                            {user && (
+                            {isLoggedIn && (
                                 <IconButton className={classes.linkFromBtn} aria-label="display more actions" edge="end" color="inherit" onClick={handleLogout}>
                                     Logout
                                 </IconButton>
                             )}
-                            {!user && (
+                            {!isLoggedIn && (
                                 <div>
                                     <Link to="/login" className={classes.link}>
                                         Login

@@ -12,7 +12,6 @@ const AllMoviesPage = () => {
     }, []);
 
     useEffect(() => {
-        console.log(selectedGenres);
         if (selectedGenres.length > 0) {
             const filter = {
                 'with_genres': [selectedGenres]

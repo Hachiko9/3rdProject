@@ -32,16 +32,9 @@ const ScrollAnimatedComponent = () => {
 
     const listenForScroll = (ev) => {
         const {scrollTop} = ev.target;
-        console.log(scrollTop);
-        console.log(scrollTop > 200 && isArrowVisible);
-        console.log('========> ', scrollTop <= 200, isArrowVisible);
 
         if (scrollTop > 200 && isArrowVisible) {
             setIsArrowVisible(false);
-        }
-
-        if (scrollTop <= 200 && !isArrowVisible) {
-            setIsArrowVisible(true);
         }
     }
 

@@ -46,7 +46,7 @@ const SearchComponent = () => {
                 onInputChange={handleInputChange}
                 getOptionLabel={(option) => option.title || ''}
                 renderInput={(params) => <TextField {...params} label="Search a movie..." variant="outlined" />}
-                open={console.log('') && searchedMovies.length > 0}
+                open={(() => {}) && searchedMovies.length > 0}
                 onBlur={() => setSearchedMovies([])}
                 onChange={handleOnChange}
                 noOptionsText="Type the movie title to search"

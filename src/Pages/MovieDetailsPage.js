@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MovieDetailsPage = ({user}) => {
+const MovieDetailsPage = ({setUser, user}) => {
     const classes = useStyles();
     const [showForm, setShowForm] = useState(false);
     const [movie, setMovie] = useState({});
@@ -78,8 +78,6 @@ const MovieDetailsPage = ({user}) => {
                 release_date: `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
             });
         });
-
-
     }, [movieId]);
 
     const toggleForm = () => {
@@ -91,7 +89,7 @@ const MovieDetailsPage = ({user}) => {
     }
 
     const getFavouriteBtnLabel = () => {
-        return user && !user.favouriteMoviesIds.includes(movie.id) ? 'ADD TO FAVOURITES' : 'REMOVE FROM FAVOURITES'
+        return Object.keys(user).length && !user.favouriteMoviesIds.includes(movieId) ? 'ADD TO FAVOURITES' : 'REMOVE FROM FAVOURITES'
     }
 
     const handleClose = () => {
@@ -99,7 +97,10 @@ const MovieDetailsPage = ({user}) => {
     }
 
     const addFavourite = () => {
-        addFavouriteMovie(user._id, movie.id).then(res => getFavouriteBtnLabel()).catch(err => console.log(err))
+        addFavouriteMovie(user._id, movie.id).then((user) => {
+            setUser(user);
+            getFavouriteBtnLabel();
+        }).catch(err => console.log(err))
     }
 
     return (

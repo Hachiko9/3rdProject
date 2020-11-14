@@ -3,10 +3,8 @@ import axios from 'axios';
 export const login = (email, password) => {
     return axios.post('http://localhost:5000/user/login', {email, password})
         .then(res => {
-            console.log(res);
             localStorage.setItem('accessToken', res.data.accessToken);
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-            return res;
+            return res.data.user;
         })
         .catch(err => err);
 }
@@ -15,14 +13,13 @@ export const signup = (email, password, username) => {
     return axios.post('http://localhost:5000/user/signup', {email, username, password})
         .then(res => {
             localStorage.setItem('accessToken', res.data.accessToken);
-            localStorage.setItem('user', JSON.stringify(res.data.user));
-            return res;
+            return res.data.user;
         })
         .catch(err => err);
 }
 
-export const logout = () => {
-    const userId = JSON.parse(localStorage.getItem('user'))._id;
+export const logout = (userId) => {
+    console.log(userId);
     return axios.post('http://localhost:5000/user/logout', {userId})
         .then(() => {
             localStorage.clear();
@@ -30,7 +27,18 @@ export const logout = () => {
         .catch(err => err);
 }
 
+export const checkSession = () => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+        return axios.get(`http://localhost:5000/user/session/${token}`)
+            .then((res) => res.data.session.userId)
+            .catch(err => err);
+    }
+
+    return new Promise(() => {});
+}
+
 export const addFavouriteMovie = (userId, movieId) => {
     return axios.post(`http://localhost:5000/user/${userId}/like`, {movieId})
-        .then(res => res.data)
+        .then(res => res.data.user)
 }

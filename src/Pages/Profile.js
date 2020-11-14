@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
+import PropTypes from "prop-types";
 import {getReviewsByUser} from "../services/ReviewService";
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import UserReviewsComponent from "../components/UserReviewsComponent";
-import FavouriteMovieComponent from "../components/FavouriteMovieComponent";
 import FavouriteMoviesComponent from "../components/FavouriteMoviesComponent";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import SwipeableViews from 'react-swipeable-views';
-import TabPanel from "@material-ui/lab/TabPanel";
 import TabContext from "@material-ui/lab/TabContext";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,11 +35,38 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const TabPanel = props => {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`full-width-tabpanel-${index}`}
+            aria-labelledby={`full-width-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <div>
+                    {children}
+                </div>
+            )}
+        </div>
+    );
+};
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.any.isRequired,
+    value: PropTypes.any.isRequired
+};
+
 const Profile = ({user}) => {
     const [ reviews, setReviews ] = useState({});
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const theme = useTheme();
+    const isLoggedIn = user && Object.keys(user).length > 0;
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -54,53 +80,59 @@ const Profile = ({user}) => {
         getReviewsByUser(user.username)
             .then(reviews => setReviews(reviews))
             .catch(err => console.log(err))
-    }, []);
+    }, [user]);
 
-    console.log('user', user);
     return (
         <div className={classes.root}>
-            <div className={classes.movieContainer}>
+            {isLoggedIn && <div className={classes.movieContainer}>
                 <TabContext value={value}>
-
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="fullWidth"
-                    aria-label="full width tabs example"
-                    style={{height: 48, marginBottom: 16, padding: '0 16px'}}
-                >
-                    <Tab label="My reviews" />
-                    <Tab label="My favourite movies" />
-                    <Tab label="My details" />
-                </Tabs>
-                <SwipeableViews
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                    index={value}
-                    onChangeIndex={handleChangeIndex}
-                >
-                    <TabPanel value={value} index={0} dir={theme.direction}>
-                        {reviews.length > 0 &&
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor="primary"
+                        textColor="primary"
+                        variant="fullWidth"
+                        aria-label="full width tabs example"
+                        style={{height: 48, marginBottom: 16}}
+                    >
+                        <Tab label="My reviews"/>
+                        <Tab label="My favourite movies"/>
+                        <Tab label="My details"/>
+                    </Tabs>
+                    <SwipeableViews
+                        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+                        index={value}
+                        onChangeIndex={handleChangeIndex}
+                    >
+                        <TabPanel index={0} dir={theme.direction} value={value}>
+                            {reviews.length > 0 &&
                             <UserReviewsComponent user={user} reviewsByUser={reviews}/>
-                        }
-                    </TabPanel>
-                    <TabPanel value={value} index={1} dir={theme.direction}>
-                        {user.favouriteMoviesIds.length > 0 &&
-                        <FavouriteMoviesComponent user={user}/>
-                        }
-                    </TabPanel>
-                    <TabPanel value={value} index={2} dir={theme.direction}>
+                            }
+                        </TabPanel>
+                        <TabPanel index={1} dir={theme.direction} value={value}>
+                            {user.favouriteMoviesIds.length > 0 &&
+                            <FavouriteMoviesComponent user={user}/>
+                            }
+                        </TabPanel>
+                        {/*<TabPanel index={2} dir={theme.direction} value={value}>
                         Item Three
-                    </TabPanel>
-                </SwipeableViews>
+                    </TabPanel>*/}
+                    </SwipeableViews>
                 </TabContext>
-
-
-
-            </div>
+            </div>}
         </div>
     );
+}
+
+TabContext.propTypes = {
+    index: PropTypes.any,
+    value: PropTypes.any
+};
+
+
+TabPanel.propTypes = {
+    index: PropTypes.any,
+    value: PropTypes.any
 }
 
 export default Profile;

@@ -56,12 +56,13 @@ const SignupPage = () => {
         return password.length <= 8 && password.length !== 0;
     }
 
-    const handleSubmit = () => {
+    const handleSubmit = ({setUser}) => {
         signup(email, password, username)
-            .then(() => {
+            .then((res) => {
                 document.getElementById('text').style.opacity = 1;
                 setTimeout(() => {
-                    history.push('/')
+                    setUser(res.data.user);
+                    history.push('/');
                 }, 1500)
             })
             .catch(err => console.log(err));

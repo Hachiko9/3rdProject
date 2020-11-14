@@ -41,28 +41,19 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const LoginPage = () => {
+const LoginPage = ({setUser}) => {
     const classes = useStyles();
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     let history = useHistory();
 
-    // useEffect(() => {
-    //     getLastMovieId().then(id => getRandomImage(id));
-    // }, []);
-    //
-    // const getRandomImage = (maxId) => {
-    //     const randomId = Math.floor(Math.random() * (maxId + 1));
-    //     const image = getMovieImage(randomId)
-    //     console.log(image)
-    // }
-
     const handleSubmit = () => {
         login(email, password)
-            .then(() => {
+            .then((user) => {
                 document.getElementById('text').style.opacity = 1;
                 setTimeout(() => {
-                    history.push('/')
+                    setUser(user);
+                    history.push('/');
                 },1500)
             })
             .catch(err => console.log(err));

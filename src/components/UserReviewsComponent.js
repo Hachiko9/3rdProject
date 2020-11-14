@@ -45,7 +45,6 @@ const UserReviewsComponent = ({user}) => {
         <div className={classes.root}>
             {reviews.length > 0 &&
             <div>
-                <h1 className={classes.title}>Your Reviews</h1>
                 <div className={classes.grid}>
                     {reviews.length > 0 && reviews.map(review =>
                         <UserReviewComponent key={review.id || review._id} user={user} review={review} handleDelete={handleDelete} movieId={review.movieId} setUpdate={setUpdate}/>
