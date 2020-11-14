@@ -58,10 +58,10 @@ const SignupPage = () => {
 
     const handleSubmit = ({setUser}) => {
         signup(email, password, username)
-            .then((res) => {
+            .then((user) => {
                 document.getElementById('text').style.opacity = 1;
                 setTimeout(() => {
-                    setUser(res.data.user);
+                    setUser(user);
                     history.push('/');
                 }, 1500)
             })
